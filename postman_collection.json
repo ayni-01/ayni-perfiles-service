@@ -1,0 +1,246 @@
+{
+  "info": {
+    "name": "Somos Ayni — perfiles-service",
+    "description": "Endpoints del perfiles-service (puerto 8082). Requiere JWT de identidad-service (puerto 8081).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_IDENTIDAD",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "BASE_PERFILES",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "BASE_RETOS",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "BASE_POSTULACIONES",
+      "value": "http://localhost:8084"
+    },
+    {
+      "key": "BASE_HABILIDADES",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "BASE_NOTIFICACIONES",
+      "value": "http://localhost:8086"
+    },
+    {
+      "key": "BASE_METRICAS",
+      "value": "http://localhost:8087"
+    },
+    {
+      "key": "TOKEN_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "TOKEN_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "ID_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "ID_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "RETO_ID",
+      "value": ""
+    },
+    {
+      "key": "POSTULACION_ID",
+      "value": ""
+    },
+    {
+      "key": "NOTIFICACION_ID",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Crear Perfil Empresa",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_EMPRESA}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/api/v1/perfiles/empresa",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "perfiles",
+            "empresa"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"razonSocial\":\"Tech Perú SAC\",\"ruc\":\"20123456789\",\"sector\":\"Tecnología\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Crear Perfil Talento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/api/v1/perfiles/talento",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "perfiles",
+            "talento"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombreCompleto\":\"Juan Pérez\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Obtener Perfil Empresa",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_EMPRESA}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/api/v1/perfiles/empresa/{{ID_EMPRESA}}",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "perfiles",
+            "empresa",
+            "{{ID_EMPRESA}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Obtener Perfil Talento",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/api/v1/perfiles/talento/{{ID_TALENTO}}",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "perfiles",
+            "talento",
+            "{{ID_TALENTO}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Editar Perfil Talento",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/api/v1/perfiles/talento/{{ID_TALENTO}}",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "perfiles",
+            "talento",
+            "{{ID_TALENTO}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombreCompleto\":\"Juan Pérez García\",\"ubicacion\":\"Lima, Perú\",\"sobreMi\":\"Dev backend Java\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_PERFILES}}/actuator/health",
+          "host": [
+            "{{BASE_PERFILES}}"
+          ],
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      }
+    }
+  ]
+}
