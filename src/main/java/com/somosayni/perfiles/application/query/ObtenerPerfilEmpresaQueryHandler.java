@@ -1,0 +1,20 @@
+package com.somosayni.perfiles.application.query;
+
+import com.somosayni.perfiles.application.port.PerfilEmpresaRepository;
+import com.somosayni.perfiles.domain.model.PerfilEmpresa;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ObtenerPerfilEmpresaQueryHandler {
+
+    private final PerfilEmpresaRepository repository;
+
+    public ObtenerPerfilEmpresaQueryHandler(PerfilEmpresaRepository repository) {
+        this.repository = repository;
+    }
+
+    public PerfilEmpresa handle(ObtenerPerfilEmpresaQuery query) {
+        return repository.findById(query.empresaId())
+                .orElseThrow(() -> new IllegalArgumentException("Empresa no encontrada"));
+    }
+}
