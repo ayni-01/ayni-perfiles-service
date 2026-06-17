@@ -23,8 +23,12 @@ public class CrearPerfilEmpresaCommandHandler {
         }
 
         PerfilEmpresa perfil = new PerfilEmpresa(command.usuarioId(), command.razonSocial(), command.ruc());
-        if (command.sector() != null) {
-            perfil = new PerfilEmpresa(command.usuarioId(), command.razonSocial(), command.ruc());
+        if (command.sector() != null && !command.sector().isBlank()) {
+            try {
+                perfil.setSectorInternal(PerfilEmpresa.Sector.valueOf(command.sector().toUpperCase()));
+            } catch (IllegalArgumentException ex) {
+                throw new IllegalArgumentException("Sector inválido: " + command.sector());
+            }
         }
         return repository.save(perfil);
     }
