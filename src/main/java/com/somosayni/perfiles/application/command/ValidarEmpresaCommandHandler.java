@@ -14,7 +14,9 @@ public class ValidarEmpresaCommandHandler {
     }
 
     public PerfilEmpresa handle(ValidarEmpresaCommand command) {
-        PerfilEmpresa perfil = repository.findById(command.empresaId())
+        String id = command.empresaId();
+        PerfilEmpresa perfil = repository.findById(id)
+                .or(() -> repository.findByUsuarioId(id))
                 .orElseThrow(() -> new IllegalArgumentException("Empresa no encontrada"));
 
         perfil.validar();
