@@ -14,7 +14,9 @@ public class EditarPerfilTalentoCommandHandler {
     }
 
     public PerfilTalento handle(EditarPerfilTalentoCommand command) {
-        PerfilTalento perfil = repository.findById(command.talentoId())
+        String id = command.talentoId();
+        PerfilTalento perfil = repository.findById(id)
+                .or(() -> repository.findByUsuarioId(id))
                 .orElseThrow(() -> new IllegalArgumentException("Perfil no encontrado"));
 
         if (command.nombreCompleto() != null) perfil.actualizarNombreCompleto(command.nombreCompleto());

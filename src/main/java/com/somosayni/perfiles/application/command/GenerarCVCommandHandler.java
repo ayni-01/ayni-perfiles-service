@@ -14,7 +14,9 @@ public class GenerarCVCommandHandler {
     }
 
     public PerfilTalento handle(GenerarCVCommand command) {
-        PerfilTalento perfil = repository.findById(command.talentoId())
+        String id = command.talentoId();
+        PerfilTalento perfil = repository.findById(id)
+                .or(() -> repository.findByUsuarioId(id))
                 .orElseThrow(() -> new IllegalArgumentException("Perfil no encontrado"));
 
         perfil.generarCV(command.contenidoCv());
