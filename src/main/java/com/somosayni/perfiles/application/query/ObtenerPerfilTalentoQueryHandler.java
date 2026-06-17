@@ -14,7 +14,9 @@ public class ObtenerPerfilTalentoQueryHandler {
     }
 
     public PerfilTalento handle(ObtenerPerfilTalentoQuery query) {
-        return repository.findById(query.talentoId())
+        String id = query.talentoId();
+        return repository.findById(id)
+                .or(() -> repository.findByUsuarioId(id))
                 .orElseThrow(() -> new IllegalArgumentException("Perfil no encontrado"));
     }
 }

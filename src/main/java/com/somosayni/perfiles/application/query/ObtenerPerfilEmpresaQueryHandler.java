@@ -14,7 +14,9 @@ public class ObtenerPerfilEmpresaQueryHandler {
     }
 
     public PerfilEmpresa handle(ObtenerPerfilEmpresaQuery query) {
-        return repository.findById(query.empresaId())
+        String id = query.empresaId();
+        return repository.findById(id)
+                .or(() -> repository.findByUsuarioId(id))
                 .orElseThrow(() -> new IllegalArgumentException("Empresa no encontrada"));
     }
 }
